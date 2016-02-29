@@ -18,13 +18,13 @@ class Covariances(BaseEstimator, TransformerMixin):
 
     """Estimation of covariance matrix.
 
-    Perform a simple covariance matrix estimation for each givent trial.
+    Perform a simple covariance matrix estimation for each given trial.
 
     Parameters
     ----------
     estimator : string (default: 'scm')
         covariance matrix estimator. For regularization consider 'lwf' or 'oas'
-        For a complete list of estimator, see `utils.covariance`.
+        For a more complete list of estimators, see `utils.covariance`.
 
     See Also
     --------
@@ -67,7 +67,7 @@ class Covariances(BaseEstimator, TransformerMixin):
         Returns
         -------
         covmats : ndarray, shape (n_trials, n_channels, n_channels)
-            ndarray of covariance matrices for each trials.
+            ndarray of covariance matrices for each trial.
         """
         covmats = covariances(X, estimator=self.estimator)
         return covmats
@@ -78,12 +78,12 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
     """Estimate special form covariance matrix for ERP.
 
     Estimation of special form covariance matrix dedicated to ERP processing.
-    For each class, a prototyped response is obtained by average across trial :
+    For each class, a prototyped response is obtained by average across trial:
 
     .. math::
         \mathbf{P} = \\frac{1}{N} \sum_i^N \mathbf{X}_i
 
-    and a super trial is build using the concatenation of P and the trial X :
+    and a super trial is build using the concatenation of P and the trial X:
 
     .. math::
         \mathbf{\\tilde{X}}_i =  \left[
@@ -105,10 +105,10 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
         If None (default), all classes will be accounted.
     estimator : string (default: 'scm')
         covariance matrix estimator. For regularization consider 'lwf' or 'oas'
-        For a complete list of estimator, see `utils.covariance`.
+        For a more complete list of estimators, see `utils.covariance`.
     svd : int | None (default None)
-        if not none, the prototype responses will be reduce using a svd using
-        the number of components passed in svd.
+        if not none, the prototype responses will be reduced using using the
+        number of components passed to an svd.
 
     See Also
     --------
@@ -144,7 +144,7 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
     def fit(self, X, y):
         """Fit.
 
-        Estimate the Prototyped response for each classes.
+        Estimate the prototyped response for each class.
 
         Parameters
         ----------
@@ -179,7 +179,7 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        """Estimate special form covariance matrices.
+        """Estimate the special form covariance matrices.
 
         Parameters
         ----------
@@ -188,10 +188,10 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
 
         Returns
         -------
-        covmats : ndarray, shape (n_trials, n_c, n_c)
-            ndarray of covariance matrices for each trials, with n_c the size
-            of covmats equal to n_channels * (n_classes + 1) in case svd is
-            None and equal to n_channels + n_classes * svd otherwise.
+        covmats : ndarray, shape (n_trials, n_channels, n_channels)
+            ndarray of covariance matrices for each trial, with n_channels the
+            size of covmats equal to n_channels * (n_classes + 1) in case svd
+            is None and equal to n_channels + n_classes * svd otherwise.
         """
         covmats = covariances_EP(X, self.P, estimator=self.estimator)
         return covmats
@@ -200,7 +200,7 @@ class ERPCovariances(BaseEstimator, TransformerMixin):
 class XdawnCovariances(BaseEstimator, TransformerMixin):
 
     """
-    Compute xdawn, project the signal and compute the covariances
+    Compute Xdawn, project the signal and compute the covariances.
 
     """
 
@@ -237,7 +237,7 @@ class XdawnCovariances(BaseEstimator, TransformerMixin):
 class CospCovariances(BaseEstimator, TransformerMixin):
 
     """
-    compute the cospectral covariance matrices
+    Compute the cospectral covariance matrices
 
     """
 
